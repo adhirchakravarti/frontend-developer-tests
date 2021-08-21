@@ -1,0 +1,30 @@
+@import '../../index.scss';
+
+.country {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  border: 1px solid $color-grey;
+  box-shadow: 2px 2px 1px $color-grey-dark;
+  cursor: pointer;
+
+  &:last-child {
+    margin: 0;
+  }
+
+  &__row {
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: space-between;
+
+    &__summary {
+      display: flex;
+      justify-self: flex-start;
+    }
+    &__accordion-toggle {
+      display: flex;
+      justify-self: center;
+    }
+  }
+}

@@ -1,24 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { AccordionProvider } from './app-state/accordionContext';
+import './App.scss';
+import Countries from './components/Countries';
+// import Users from './components/Users/Users';
 
-function App() {
+function App(): JSX.Element {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      {/* <Users /> */}
+      <div className="app__heading">Stackpath App</div>
+      <AccordionProvider>
+        <Countries />
+      </AccordionProvider>
     </div>
   );
 }

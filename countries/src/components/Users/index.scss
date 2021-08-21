@@ -1,0 +1,12 @@
+@import '../../index.scss';
+
+.users {
+  display: flex;
+  flex: 1 1 auto;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+}
