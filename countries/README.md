@@ -26,5 +26,9 @@ https://randomuser.me/api/?results=100
 - I don't use TypeScript on a daily basis at the moment and still have lots to learn, so please take that into consideration
 - As suggested, I focussed on functionality, not such on aesthetics. Hence the gray-scale theme.
 - Things I would change if spending more time
-  1. Add themed colors using SCSS variables
-  2. Make the app responsive all the way down to viewport widths less than 200px and greater than 2500px
+  1. Add unit tests for each component.
+  2. Add themed colors using SCSS variables
+  3. Make the app responsive all the way down to viewport widths less than 200px and greater than 2500px
+  4. Implement keyboard accessibility by allowing all elements to be keyboard interactive.
+  5. Implement screen reader accessibility
+  6. Configure webpack (after ejecting config) to reduce application bundle size by implementing minification, compression and code-splitting
