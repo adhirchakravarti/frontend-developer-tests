@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/no-danger */
+import React, { useMemo } from 'react';
 import Accordion from '../Accordion';
 import Users from '../Users';
 import { AccordionContext } from '../../app-state/accordionContext';
@@ -24,18 +25,39 @@ function Country({
   userCount,
   users
 }: CountryProps): JSX.Element {
-  const accordionContext = React.useContext(AccordionContext);
-  console.log('context = ', accordionContext, countryIndex);
+  const { activeIndex, setActiveIndex } = React.useContext(AccordionContext);
+  const accordionOpen = useMemo(() => {
+    return activeIndex === countryIndex;
+  }, [activeIndex, countryIndex]);
+
+  const handleToggleAccordion = () => {
+    const newIndex = activeIndex !== countryIndex ? countryIndex : null;
+    setActiveIndex(newIndex);
+  };
+  const accordionIcon = useMemo(() => {
+    if (accordionOpen) {
+      return `&#9650`;
+    }
+    return `&#9660`;
+  }, [accordionOpen]);
   return (
     <div className="country" key={country}>
       <div className="country__row">
         <div className="country__row__summary">{`${country}, Number of users: ${userCount}`}</div>
-        <button className="country__row__accordion-toggle" type="button">
-          Users
+        <button
+          className="country__row__accordion-toggle"
+          type="button"
+          onClick={handleToggleAccordion}
+        >
+          Show users{' '}
+          <span
+            className="country__row__accordion-toggle__icon"
+            dangerouslySetInnerHTML={{ __html: `${accordionIcon}` }}
+          />
         </button>
       </div>
 
-      <Accordion open>
+      <Accordion open={accordionOpen}>
         <Users users={users} />
       </Accordion>
     </div>

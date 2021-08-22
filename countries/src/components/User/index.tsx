@@ -1,4 +1,5 @@
 import React from 'react';
+import { DateTime } from 'luxon';
 import './index.scss';
 
 type UserProps = {
@@ -18,6 +19,7 @@ function User({
   state,
   country
 }: UserProps): JSX.Element {
+  console.log(DateTime.fromISO(registeredDate));
   return (
     <div className="user" key={`${name}-${registeredDate}`}>
       <div className="user__name">{name}</div>

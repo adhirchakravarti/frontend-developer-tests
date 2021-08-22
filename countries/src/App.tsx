@@ -7,7 +7,6 @@ import Countries from './components/Countries';
 function App(): JSX.Element {
   return (
     <div className="app">
-      {/* <Users /> */}
       <div className="app__heading">Stackpath App</div>
       <AccordionProvider>
         <Countries />

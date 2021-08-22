@@ -7,7 +7,6 @@
   margin: 0 0 1rem 0;
   border: 1px solid $color-grey;
   box-shadow: 2px 2px 1px $color-grey-dark;
-  cursor: pointer;
 
   &:last-child {
     margin: 0;
@@ -25,6 +24,16 @@
     &__accordion-toggle {
       display: flex;
       justify-self: center;
+      align-items: center;
+      margin: 0;
+      border: none;
+      background-color: unset;
+      cursor: pointer;
+      font-weight: bold;
+
+      &__icon {
+        margin-left: 0.5rem;
+      }
     }
   }
 }

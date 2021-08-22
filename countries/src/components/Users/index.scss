@@ -3,6 +3,12 @@
 .users {
   display: flex;
   flex: 1 1 auto;
+  flex-direction: column;
+
+  &__header {
+    display: grid;
+    grid-template-columns: [user-name] 1fr [gender] auto [registered-date] 1fr [location] 1fr;
+  }
 
   &__list {
     display: flex;

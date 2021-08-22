@@ -16,6 +16,12 @@ type UsersProps = {
 function Users({ users }: UsersProps): JSX.Element {
   return (
     <div className="users">
+      <div className="users__header">
+        <div className="users__header__name">Name</div>
+        <div className="users__header__gender">Gender</div>
+        <div className="users__header__registered-date">Registered On</div>
+        <div className="users__header__location">Location</div>
+      </div>
       <div className="users__list">
         {users &&
           users.map((user) => {

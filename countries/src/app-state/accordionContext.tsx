@@ -1,19 +1,34 @@
-import React, { createContext, Dispatch, SetStateAction } from 'react';
+import React, { createContext } from 'react';
 
 type AccordionProviderProps = { children: React.ReactNode };
 
-interface AccordionContextInterface {
+export interface AccordionContextInterface {
   activeIndex: number | null;
-  setActiveIndex: Dispatch<SetStateAction<null>>;
+  setActiveIndex: (index: number) => void;
 }
 
-const AccordionContext = createContext<AccordionContextInterface | null>(null);
+export type AccordionContextType = {
+  activeIndex: number | null;
+  setActiveIndex: (index: number | null) => void;
+};
+
+const AccordionContext = createContext<AccordionContextType>({
+  activeIndex: null,
+  setActiveIndex: () => {}
+});
 
 function AccordionProvider({ children }: AccordionProviderProps): JSX.Element {
-  const [activeIndex, setActiveIndex] = React.useState(null);
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
   // NOTE: you *might* need to memoize this value
   // Learn more in http://kcd.im/optimize-context
-  const value: AccordionContextInterface = { activeIndex, setActiveIndex };
+  //   let activeIndex = null;
+  const value = {
+    activeIndex,
+    setActiveIndex
+    // setActiveIndex: (index: number) => {
+    //   activeIndex = index;
+    // }
+  };
   return (
     <AccordionContext.Provider value={value}>
       {children}
