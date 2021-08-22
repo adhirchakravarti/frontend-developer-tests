@@ -8,6 +8,23 @@
   &__header {
     display: grid;
     grid-template-columns: [user-name] 1fr [gender] auto [registered-date] 1fr [location] 1fr;
+    margin: 0.5rem 1rem;
+    padding: 1rem;
+
+    &__name {
+      display: grid;
+      justify-self: flex-start;
+    }
+
+    &__registered-date {
+      display: grid;
+      justify-self: center;
+    }
+
+    &__location {
+      display: grid;
+      justify-self: flex-end;
+    }
   }
 
   &__list {

@@ -4,6 +4,7 @@ import Accordion from '../Accordion';
 import Users from '../Users';
 import { AccordionContext } from '../../app-state/accordionContext';
 import './index.scss';
+import TextLabel from '../TextLabel';
 
 type CountryProps = {
   country: string;
@@ -43,7 +44,13 @@ function Country({
   return (
     <div className="country" key={country}>
       <div className="country__row">
-        <div className="country__row__summary">{`${country}, Number of users: ${userCount}`}</div>
+        <div className="country__row__summary">
+          <TextLabel
+            type="Item-Title"
+            text={`${country}, Total users: ${userCount}`}
+          />
+        </div>
+
         <button
           className="country__row__accordion-toggle"
           type="button"

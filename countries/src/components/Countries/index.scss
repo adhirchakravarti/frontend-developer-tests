@@ -1,14 +1,9 @@
 .countries {
   display: flex;
-  //   flex: 1 1 auto;
   flex-direction: column;
   margin: 2rem;
   & > * {
     margin: 0 0 1rem 0;
-  }
-  &__title {
-    display: flex;
-    justify-content: center;
   }
 
   &__list {

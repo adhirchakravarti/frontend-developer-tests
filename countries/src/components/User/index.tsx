@@ -1,15 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { DateTime } from 'luxon';
 import './index.scss';
-
-type UserProps = {
-  name: string;
-  gender: string;
-  registeredDate: string;
-  city: string;
-  state: string;
-  country: string;
-};
+import { UserType } from '../../model/types';
 
 function User({
   name,
@@ -18,13 +10,17 @@ function User({
   city,
   state,
   country
-}: UserProps): JSX.Element {
-  console.log(DateTime.fromISO(registeredDate));
+}: UserType): JSX.Element {
+  const formattedDate = useMemo(() => {
+    return DateTime.fromISO(registeredDate).toLocaleString(
+      DateTime.DATETIME_FULL
+    );
+  }, [registeredDate]);
   return (
     <div className="user" key={`${name}-${registeredDate}`}>
       <div className="user__name">{name}</div>
       <div className="user__gender">{gender}</div>
-      <div className="user__registered-date">{registeredDate}</div>
+      <div className="user__registered-date">{formattedDate}</div>
       <div className="user__location">{`${city}, ${state}, ${country}`}</div>
     </div>
   );

@@ -5,6 +5,21 @@
   grid-template-columns: [user-name] 1fr [gender] auto [registered-date] 1fr [location] 1fr;
   border: 1px solid $color-grey;
   box-shadow: 2px 2px 1px $color-grey-dark;
-  padding: 1rem 0;
+  padding: 1rem;
   margin: 0.5rem 1rem;
+
+  &__name {
+    display: grid;
+    justify-self: flex-start;
+  }
+
+  &__registered-date {
+    display: grid;
+    justify-self: center;
+  }
+
+  &__location {
+    display: grid;
+    justify-self: flex-end;
+  }
 }

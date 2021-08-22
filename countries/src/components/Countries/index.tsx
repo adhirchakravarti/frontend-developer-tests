@@ -1,25 +1,9 @@
 import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import getApiData from '../../services/getApiData';
 import Country from '../Country';
+import TextLabel from '../TextLabel';
+import { UserData, CountryUserData } from '../../model/types';
 import './index.scss';
-
-type CountryData = {
-  info: Record<string, unknown>;
-  results: Record<string, unknown>[];
-};
-
-type CountryUserData = {
-  country: string;
-  userCount: number;
-  users: {
-    name: string;
-    gender: string;
-    registeredDate: string;
-    city: string;
-    state: string;
-    country: string;
-  }[];
-};
 
 const userAPI = 'https://randomuser.me/api/?results=100';
 
@@ -30,16 +14,13 @@ function Countries(): JSX.Element {
   const [error, setError] = useState<Error | null>(null);
   const getCountryData = useCallback(async () => {
     try {
-      const response = await getApiData<Promise<CountryData>>(userAPI);
-      console.log(response);
+      const response = await getApiData<Promise<UserData>>(userAPI);
       if (!response) {
         throw Error('failed fetch users');
       }
       const { results } = response;
       setCountryData(results);
     } catch (e) {
-      console.log(e);
-      //   return e.toString();
       setError(e);
     }
   }, [setCountryData, setError]);
@@ -48,7 +29,6 @@ function Countries(): JSX.Element {
     if (countryData && countryData.length > 0) {
       const countryList = countryData?.reduce(
         (accum: any, curr: any): CountryUserData[] => {
-          // Name, Gender, City, State, and Date Registered
           const {
             location: { country, state, city },
             gender,
@@ -95,27 +75,29 @@ function Countries(): JSX.Element {
     }
   }, [getCountryData, countryData]);
 
-  console.log(sortedCountries);
   return (
     <div className="countries">
-      <div className="countries__title">Countries</div>
-      <div className="countries__list-container">
-        <ul className="countries__list">
-          {sortedCountries &&
-            sortedCountries.map((item, index) => {
-              const { country, userCount, users } = item;
-              return (
-                <Country
-                  key={country}
-                  country={country}
-                  countryIndex={index}
-                  userCount={userCount}
-                  users={users}
-                />
-              );
-            })}
-        </ul>
-      </div>
+      <TextLabel type="Section-Title" text="Countries" />
+      {error && <TextLabel type="Item-Title" text={error.toString()} />}
+      {!error && (
+        <div className="countries__list-container">
+          <ul className="countries__list">
+            {sortedCountries &&
+              sortedCountries.map((item, index) => {
+                const { country, userCount, users } = item;
+                return (
+                  <Country
+                    key={country}
+                    country={country}
+                    countryIndex={index}
+                    userCount={userCount}
+                    users={users}
+                  />
+                );
+              })}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
