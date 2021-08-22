@@ -3,21 +3,27 @@ import './index.scss';
 
 type DropdownOption = {
   label: string;
-  value: string | undefined;
+  value: string;
 };
 
 type SelectDropdownProps = {
   options: DropdownOption[];
   onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  selectedValue: string | undefined;
 };
 
 function SelectDropdown({
   options,
-  onChange
+  onChange,
+  selectedValue = 'Both'
 }: SelectDropdownProps): JSX.Element {
   return (
     <div className="select-dropdown">
-      <select className="select-dropdown__dropdown" onChange={onChange}>
+      <select
+        className="select-dropdown__dropdown"
+        onChange={onChange}
+        value={selectedValue}
+      >
         {options &&
           options.map((option) => {
             return (

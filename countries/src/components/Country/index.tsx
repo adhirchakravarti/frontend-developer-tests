@@ -1,11 +1,5 @@
 /* eslint-disable react/no-danger */
-import React, {
-  useMemo,
-  KeyboardEvent,
-  useState,
-  useContext,
-  useCallback
-} from 'react';
+import React, { useMemo, useState, useContext, useCallback } from 'react';
 import Accordion from '../Accordion';
 import Users from '../Users';
 import { AccordionContext } from '../../app-state/accordionContext';
@@ -34,32 +28,27 @@ function Country({
   users
 }: CountryProps): JSX.Element {
   const { activeIndex, setActiveIndex } = useContext(AccordionContext);
-  const [filter, setFilter] = useState<string | undefined>(undefined);
+  const [filter, setFilter] = useState<string>('both');
   const accordionOpen = useMemo(() => {
     return activeIndex === countryIndex;
   }, [activeIndex, countryIndex]);
 
-  const handleToggleAccordion = useCallback(() => {
-    const newIndex = activeIndex !== countryIndex ? countryIndex : null;
-    setActiveIndex(newIndex);
-  }, [activeIndex, setActiveIndex, countryIndex]);
-
-  const handleKeyPress = (e: KeyboardEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    const { code } = e;
-    if (code === 'Enter') {
-      handleToggleAccordion();
-    }
-  };
+  const handleToggleAccordion = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      const target = e.target as HTMLInputElement;
+      const { tagName } = target;
+      if (tagName !== 'SELECT') {
+        const newIndex = activeIndex !== countryIndex ? countryIndex : null;
+        setActiveIndex(newIndex);
+      }
+    },
+    [activeIndex, setActiveIndex, countryIndex]
+  );
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
     const {
       target: { value }
     } = e;
-    if (value === 'both') {
-      setFilter(undefined);
-    }
     setFilter(value);
   };
 
@@ -71,14 +60,15 @@ function Country({
   }, [accordionOpen]);
 
   return (
-    <div className="country" key={country}>
-      <div
-        className="country__row"
-        onClick={handleToggleAccordion}
-        onKeyPress={handleKeyPress}
-        role="button"
-        tabIndex={0}
-      >
+    <div
+      className="country"
+      key={country}
+      id={country}
+      onClickCapture={handleToggleAccordion}
+      role="button"
+      tabIndex={0}
+    >
+      <div className="country__row">
         <div className="country__row__summary">
           <TextLabel
             type="Item-Title"
@@ -92,7 +82,11 @@ function Country({
       </div>
 
       <Accordion open={accordionOpen}>
-        <SelectDropdown options={genderOptions} onChange={handleFilterChange} />
+        <SelectDropdown
+          options={genderOptions}
+          onChange={handleFilterChange}
+          selectedValue={filter}
+        />
         <Users users={users} filter={filter} />
       </Accordion>
     </div>
