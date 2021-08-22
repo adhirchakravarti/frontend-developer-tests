@@ -2,7 +2,7 @@
 import React, { useMemo, useState, useContext, useCallback } from 'react';
 import Accordion from '../Accordion';
 import Users from '../Users';
-import { AccordionContext } from '../../app-state/accordionContext';
+import { AccordionContext } from '../../context/accordionContext';
 import { UserType } from '../../model/types';
 import './index.scss';
 import TextLabel from '../TextLabel';

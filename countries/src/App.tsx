@@ -1,5 +1,5 @@
 import React from 'react';
-import { AccordionProvider } from './app-state/accordionContext';
+import { AccordionProvider } from './context/accordionContext';
 import './App.scss';
 import Countries from './components/Countries';
 import TextLabel from './components/TextLabel';
