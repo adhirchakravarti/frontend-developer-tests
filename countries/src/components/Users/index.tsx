@@ -6,6 +6,7 @@ import { UserType } from '../../model/types';
 
 type UsersProps = {
   users: UserType[];
+  filter: string | undefined;
 };
 
 const sortByDate = (a: UserType, b: UserType) => {
@@ -20,12 +21,16 @@ const sortByDate = (a: UserType, b: UserType) => {
   return 0;
 };
 
-function Users({ users }: UsersProps): JSX.Element {
+function Users({ users, filter }: UsersProps): JSX.Element {
   const sortedUsers = useMemo(() => {
-    const clonedUsers: UserType[] = users.map((x) => ({ ...x }));
+    const clonedUsers: UserType[] = users
+      .map((x) => ({ ...x }))
+      .filter((x) =>
+        !filter || filter === 'both' ? true : x.gender === filter
+      );
 
     return clonedUsers.sort(sortByDate);
-  }, [users]);
+  }, [users, filter]);
 
   return (
     <div className="users">

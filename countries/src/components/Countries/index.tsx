@@ -27,6 +27,7 @@ function Countries(): JSX.Element {
 
   const sortedCountries = useMemo(() => {
     if (countryData && countryData.length > 0) {
+      /* eslint-disable  @typescript-eslint/no-explicit-any */
       const countryList = countryData?.reduce(
         (accum: any, curr: any): CountryUserData[] => {
           const {
@@ -67,6 +68,7 @@ function Countries(): JSX.Element {
       );
     }
     return null;
+    /* eslint-enable  @typescript-eslint/no-explicit-any */
   }, [countryData]);
 
   useEffect(() => {

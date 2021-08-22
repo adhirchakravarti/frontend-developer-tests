@@ -5,7 +5,7 @@ export type UserData = {
 
 export type UserType = {
   name: string;
-  gender: string;
+  gender: 'male' | 'female';
   registeredDate: string;
   city: string;
   state: string;
