@@ -1,0 +1,15 @@
+.countries {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+  & > * {
+    margin: 0 0 1rem 0;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+}
