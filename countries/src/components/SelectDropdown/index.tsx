@@ -15,7 +15,7 @@ type SelectDropdownProps = {
 function SelectDropdown({
   options,
   onChange,
-  selectedValue = 'Both'
+  selectedValue
 }: SelectDropdownProps): JSX.Element {
   return (
     <div className="select-dropdown">
